@@ -9,4 +9,5 @@
 #  updated_at :datetime         not null
 #
 class Patient < ApplicationRecord
+    has_many :treatments
 end

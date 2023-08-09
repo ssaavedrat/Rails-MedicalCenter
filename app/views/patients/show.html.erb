@@ -1,10 +1,33 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @patient %>
-
+<h1>Patient</h1>
+<p>
+  Nombre de Paciente: <%= @patient.name%>
+</p>
+<p>
+  Edad de Paciente: <%= @patient.age%>
+</p>
+<% last_treatment = @patient.treatments.last %>
+<% if last_treatment %>
+<p>
+  Tratamiento: <%= last_treatment.name%>
+  <%= link_to edit_treatment_path(@patient.treatments.last.id), class: "btn" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler
+        icon-tabler-edit" width="20" height="20" viewBox="0 0 24 24"
+        stroke-width="1.5" stroke="#ffec00" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2
+          -2v-3" />
+      <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+      <line x1="16" y1="5" x2="19" y2="8" />
+    <% end %>
+  </p>
+  <p>
+    Descripción: <%= last_treatment.description%>
+  </p>
+<% end %>
 <div>
   <%= link_to "Edit this patient", edit_patient_path(@patient) %> |
   <%= link_to "Back to patients", patients_path %>
-
   <%= button_to "Destroy this patient", @patient, method: :delete %>
 </div>

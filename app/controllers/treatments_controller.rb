@@ -13,15 +13,18 @@ class TreatmentsController < ApplicationController
   # GET /treatments/new
   def new
     @treatment = Treatment.new
+    @patients = Patient.all.pluck :name, :id
   end
 
   # GET /treatments/1/edit
   def edit
+    @patients = Patient.all.pluck :name, :id
   end
 
   # POST /treatments or /treatments.json
   def create
     @treatment = Treatment.new(treatment_params)
+    @patients = Patient.all.pluck :name, :id
 
     respond_to do |format|
       if @treatment.save
@@ -36,6 +39,7 @@ class TreatmentsController < ApplicationController
 
   # PATCH/PUT /treatments/1 or /treatments/1.json
   def update
+    @patients = Patient.all.pluck :name, :id
     respond_to do |format|
       if @treatment.update(treatment_params)
         format.html { redirect_to treatment_url(@treatment), notice: "Treatment was successfully updated." }
@@ -49,6 +53,7 @@ class TreatmentsController < ApplicationController
 
   # DELETE /treatments/1 or /treatments/1.json
   def destroy
+    @patients = Patient.all.pluck :name, :id
     @treatment.destroy
 
     respond_to do |format|
@@ -65,6 +70,6 @@ class TreatmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def treatment_params
-      params.require(:treatment).permit(:name, :description, :date)
+      params.require(:treatment).permit(:name, :description, :date, :patient_id)
     end
 end
